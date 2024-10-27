@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function AddCoffee() {
     const handelAddCoffee = event => {
@@ -23,13 +25,24 @@ function AddCoffee() {
             .then(res => res.json())
             .then(data => {
             console.log(data)
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Coffee added successfully!',
+                        text: 'Do you want to continue',
+                        icon: 'success',
+                        confirmButtonText: 'Okay'
+                    })
+            }
         })
     }
   return (
-    <div>
+      <div className='bg-[#F4F3F0]'>
           <h1 className="text-3xl text-center font-bold py-5">Add Coffee</h1>
           <hr />
-          <div className="p-24">
+          <Link
+              to="/"
+              className='link-primary link-hover ml-24'>Back</Link>
+          <div className="px-24 pt-10">
               <form onSubmit={handelAddCoffee}>
                   <div className="md:flex gap-4 mb-5">
                       <div className="form-control md:w-1/2">
